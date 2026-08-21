@@ -1,6 +1,6 @@
 
 class Solution {
-  public class Node{
+  static class Node{
     int data;
     Node next;
 
@@ -8,7 +8,7 @@ class Solution {
         this.data = data;
     }
   }
-public ListNode reverseList(ListNode head) {
+  public  ListNode reverseList(ListNode head){
     ListNode prev = null;
     ListNode curr = head;
 
@@ -16,16 +16,15 @@ public ListNode reverseList(ListNode head) {
         ListNode next = curr.next;
         curr.next = prev;
         prev = curr;
-        curr = next;    
+        curr = next;
     }
     return prev;
-    }
-static void printN(Node head){
-    while(head!= null){
-        System.out.print(head.data + "-->");
-        head = head.next;
+  }
+  public static void printn(Node head){
+    while(head!=null){
+        System.out.print(head.data +"-->");
     }
     System.out.println();
+  }
 }
 
-}
