@@ -1,29 +1,42 @@
 class Solution {
     public int evalRPN(String[] tokens) {
-        int reverseValue = 0;
-        String operators = "+-*/";
-        Stack<String> res = new Stack<String>();
-        
-        for(String t : tokens){
-            if(!operators.contains(t)){
-                res.push(t);
-            }else{
-                int a = Integer.valueOf(res.pop());
-                int b = Integer.valueOf(res.pop());
-                int index = operators.indexOf(t);
-                switch(index){
-                    case 0 : res.push(String.valueOf(a+b));
-                            break;
-                    case 1 : res.push(String.valueOf(b-a));
-                            break;
-                    case 2 : res.push(String.valueOf(a*b));
-                            break;
-                    case 3 : res.push(String.valueOf(b/a));
-                            break;
+        Stack<Integer> stack = new Stack<>();
+        for (String token : tokens) {
+
+            if (token.equals("+") ||
+                token.equals("-") ||
+                token.equals("*") ||
+                token.equals("/")) {
+
+                int b = stack.pop();
+                int a = stack.pop();
+
+                int result = 0;
+
+                if (token.equals("+")) {
+                    result = a + b;
                 }
+
+                else if (token.equals("-")) {
+                    result = a - b;
+                }
+
+                else if (token.equals("*")) {
+                    result = a * b;
+                }
+
+                else if (token.equals("/")) {
+                    result = a / b;
+                }
+
+                stack.push(result);
+
+            } else {
+
+                stack.push(Integer.parseInt(token));
             }
         }
-        reverseValue = Integer.valueOf(res.pop());
-        return reverseValue;
+
+        return stack.pop();
     }
 }
